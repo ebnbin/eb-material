@@ -33,7 +33,7 @@ dependencies {
         }
         return "$id:$version"
     }
-    implementation(dependency("androidx.core:core-ktx"))
+    implementation("com.github.ebnbin:eb:0.0.15")
 }
 
 afterEvaluate {
