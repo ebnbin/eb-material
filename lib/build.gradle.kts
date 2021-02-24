@@ -38,7 +38,8 @@ dependencies {
         }
         return "$id:$version"
     }
-    api("com.github.ebnbin:eb:0.0.17")
+    api("com.github.ebnbin:eb:0.0.19")
+//    api(project(":eb"))
     api(dependency("androidx.appcompat:appcompat"))
     api(dependency("com.google.android.material:material"))
 }
