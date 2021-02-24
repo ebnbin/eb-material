@@ -11,6 +11,8 @@ android {
     defaultConfig {
         minSdkVersion(versionMap.getValue("minSdkVersion").toInt())
         targetSdkVersion(versionMap.getValue("targetSdkVersion").toInt())
+        val proguardFiles = project.file("proguard").listFiles() ?: emptyArray()
+        consumerProguardFiles(*proguardFiles)
     }
     sourceSets {
         configureEach {
@@ -27,6 +29,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        moduleName = "dev.ebnbin.ebmaterial"
     }
 }
 
@@ -38,7 +41,7 @@ dependencies {
         }
         return "$id:$version"
     }
-    api("com.github.ebnbin:eb:0.0.19")
+    api("com.github.ebnbin:eb:0.0.20")
 //    api(project(":eb"))
     api(dependency("androidx.appcompat:appcompat"))
     api(dependency("com.google.android.material:material"))
