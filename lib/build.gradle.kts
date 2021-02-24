@@ -12,6 +12,14 @@ android {
         minSdkVersion(versionMap.getValue("minSdkVersion").toInt())
         targetSdkVersion(versionMap.getValue("targetSdkVersion").toInt())
     }
+    sourceSets {
+        configureEach {
+            val srcDirs = project.file("src/$name")
+                .listFiles { file -> file.isDirectory && file.name.startsWith("res-") }
+                ?: emptyArray()
+            res.srcDirs(*srcDirs)
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
