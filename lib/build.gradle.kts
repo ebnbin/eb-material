@@ -19,10 +19,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
 }
 
 dependencies {
@@ -33,7 +29,7 @@ dependencies {
         }
         return "$id:$version"
     }
-    api("com.github.ebnbin:eb:0.0.16")
+    api("com.github.ebnbin:eb:0.0.17")
     api(dependency("com.google.android.material:material"))
 }
 
