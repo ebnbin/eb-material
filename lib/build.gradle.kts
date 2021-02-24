@@ -33,7 +33,8 @@ dependencies {
         }
         return "$id:$version"
     }
-    implementation("com.github.ebnbin:eb:0.0.15")
+    api("com.github.ebnbin:eb:0.0.16")
+    api(dependency("com.google.android.material:material"))
 }
 
 afterEvaluate {
