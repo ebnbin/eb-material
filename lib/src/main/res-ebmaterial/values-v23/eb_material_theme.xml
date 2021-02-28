@@ -6,5 +6,10 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@null</item>
+        <item name="spinnerStyle">@style/EBMaterialSpinner</item>
+    </style>
+
+    <style name="EBMaterialSpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/eb_material_spinner</item>
     </style>
 </resources>
