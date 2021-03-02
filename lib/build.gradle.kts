@@ -41,9 +41,17 @@ dependencies {
         }
         return "$id:$version"
     }
-    api("com.github.ebnbin:eb:0.0.20")
-//    api(project(":eb"))
-    api(dependency("androidx.appcompat:appcompat"))
+
+    fun devDependency(id: String): Any {
+        return if (rootProject.extra.has("devLib.$id")) {
+            "com.github.ebnbin:$id:${rootProject.extra["devLib.$id"]}"
+        } else {
+            project(":$id")
+        }
+    }
+
+    api(devDependency("eb"))
+
     api(dependency("com.google.android.material:material"))
 }
 

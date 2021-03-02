@@ -1,3 +1,10 @@
 include(":lib")
-//include(":eb")
-//project(":eb").projectDir = File("../eb/lib")
+
+fun devInclude(id: String) {
+    if (!extra.has("devLib.$id")) {
+        include(":$id")
+        project(":$id").projectDir = File("../$id/lib")
+    }
+}
+
+devInclude("eb")
