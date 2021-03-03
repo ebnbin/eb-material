@@ -22,14 +22,14 @@ android {
             res.srcDirs(*srcDirs)
         }
     }
-    resourcePrefix("eb_material_")
+    resourcePrefix("ebui_")
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        moduleName = "dev.ebnbin.ebmaterial"
+        moduleName = "dev.ebnbin.ebui"
     }
 }
 

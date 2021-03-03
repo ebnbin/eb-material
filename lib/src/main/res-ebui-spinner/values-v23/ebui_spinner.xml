@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="EBUISpinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/ebui_spinner</item>
+    </style>
+</resources>
