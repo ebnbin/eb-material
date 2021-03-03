@@ -52,6 +52,7 @@ dependencies {
 
     api(devDependency("eb"))
 
+    api(dependency("androidx.recyclerview:recyclerview"))
     api(dependency("com.google.android.material:material"))
 }
 
