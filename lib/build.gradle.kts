@@ -52,6 +52,9 @@ dependencies {
 
     api(devDependency("eb"))
 
+    api(dependency("androidx.appcompat:appcompat"))
+    api(dependency("androidx.activity:activity-ktx"))
+    api(dependency("androidx.fragment:fragment-ktx"))
     api(dependency("androidx.recyclerview:recyclerview"))
     api(dependency("com.google.android.material:material"))
 }
