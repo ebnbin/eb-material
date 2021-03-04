@@ -5,5 +5,9 @@
     <application>
         <activity
             android:name=".FragmentWrapperActivity"/>
+        <provider
+            android:name=".EBUIInitializer"
+            android:authorities="${applicationId}.EBUIInitializer"
+            android:exported="false"/>
     </application>
 </manifest>
