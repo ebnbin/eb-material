@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
+    <style name="EBUIDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="alertDialogStyle">@style/EBUIAlertDialog</item>
+    </style>
+
+    <style name="EBUIAlertDialog" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="android:layout" tools:ignore="PrivateResource">@layout/abc_alert_dialog_material</item>
+        <item name="backgroundInsetStart">16dp</item>
+        <item name="backgroundInsetEnd">16dp</item>
+        <item name="backgroundInsetTop">24dp</item>
+        <item name="backgroundInsetBottom">24dp</item>
+        <item name="shapeAppearance">@style/EBUIAlertDialogShapeAppearance</item>
+    </style>
+
+    <style name="EBUIAlertDialogShapeAppearance" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+</resources>

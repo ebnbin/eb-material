@@ -8,5 +8,6 @@
         <item name="android:windowLightNavigationBar">false</item>
         <item name="android:navigationBarColor">?android:attr/colorBackground</item>
         <item name="spinnerStyle">@style/EBUISpinner</item>
+        <item name="materialAlertDialogTheme">@style/EBUIDialog</item>
     </style>
 </resources>
