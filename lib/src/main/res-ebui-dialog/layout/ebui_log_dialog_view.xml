@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ebui_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollIndicators="top|bottom"
+    tools:targetApi="m">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ebui_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="?attr/dialogPreferredPadding"
+            android:paddingEnd="?attr/dialogPreferredPadding"
+            android:fontFamily="monospace"
+            android:textIsSelectable="true"/>
+
+        <HorizontalScrollView
+            android:id="@+id/ebui_horizontal_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollIndicators="start|end">
+
+            <TextView
+                android:id="@+id/ebui_horizontal_scrollable_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="?attr/dialogPreferredPadding"
+                android:paddingEnd="?attr/dialogPreferredPadding"
+                android:fontFamily="monospace"
+                android:textIsSelectable="true"/>
+
+        </HorizontalScrollView>
+
+    </FrameLayout>
+
+</ScrollView>

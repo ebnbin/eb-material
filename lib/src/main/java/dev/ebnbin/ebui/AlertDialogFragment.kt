@@ -3,9 +3,11 @@ package dev.ebnbin.ebui
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.setFragmentResult
@@ -98,6 +100,7 @@ open class AlertDialogFragment : AppCompatDialogFragment() {
         alertDialog.setCanceledOnTouchOutside(dialogCancelable == DialogCancelable.CANCELABLE)
         alertDialog.setOnShowListener {
             it as AlertDialog
+            it.findViewById<View>(R.id.titleDividerNoCustom)?.isVisible = true
             it.getButton(DialogInterface.BUTTON_POSITIVE)?.setOnClickListener { _ ->
                 onAlertDialogPositive(it)?.let { result ->
                     setFragmentResult(result, ResultType.POSITIVE)
@@ -120,7 +123,7 @@ open class AlertDialogFragment : AppCompatDialogFragment() {
         }
         isCancelable = dialogCancelable != DialogCancelable.NOT_CANCELABLE
         onAlertDialogCreated(alertDialog, savedInstanceState)
-        return super.onCreateDialog(savedInstanceState)
+        return alertDialog
     }
 
     override fun onCancel(dialog: DialogInterface) {
