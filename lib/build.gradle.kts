@@ -78,9 +78,17 @@ afterEvaluate {
 dependencies {
     api(devDependency("eb"))
 
+    api(dependency("androidx.lifecycle:lifecycle-viewmodel-ktx"))
     api(dependency("androidx.appcompat:appcompat"))
     api(dependency("androidx.activity:activity-ktx"))
     api(dependency("androidx.fragment:fragment-ktx"))
+    api(dependency("androidx.preference:preference-ktx"))
+    api(dependency("androidx.constraintlayout:constraintlayout"))
+    api(dependency("androidx.coordinatorlayout:coordinatorlayout"))
     api(dependency("androidx.recyclerview:recyclerview"))
+    api(dependency("androidx.swiperefreshlayout:swiperefreshlayout"))
+    api(dependency("androidx.viewpager2:viewpager2"))
+    api(dependency("androidx.cardview:cardview"))
+    api(dependency("androidx.gridlayout:gridlayout"))
     api(dependency("com.google.android.material:material"))
 }
