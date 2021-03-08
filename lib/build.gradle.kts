@@ -8,12 +8,35 @@ plugins {
     `maven-publish`
 }
 
+inline fun <reified T> rootProjectExtra(key: String): T {
+    return rootProject.extra.properties.getValue(key) as T
+}
+
+inline fun <reified T> projectExtra(key: String): T {
+    return project.extra.properties.getValue(key) as T
+}
+
+fun version(key: String): String {
+    return rootProjectExtra<Map<String, String>>("versionMap").getValue(key)
+}
+
+fun dependency(id: String): String {
+    return "$id:${rootProjectExtra<Map<String, String>>("dependencyMap").getValue(id)}"
+}
+
+fun devDependency(id: String): Any {
+    return if (gradleLocalProperties(rootDir)["devEnabled"] == "true") {
+        project(":$id")
+    } else {
+        "com.github.ebnbin:$id:${rootProjectExtra<String>("dev.$id")}"
+    }
+}
+
 android {
-    val versionMap: Map<String, String> by rootProject.extra
-    compileSdkVersion(versionMap.getValue("compileSdkVersion").toInt())
+    compileSdkVersion(version("compileSdkVersion").toInt())
     defaultConfig {
-        minSdkVersion(versionMap.getValue("minSdkVersion").toInt())
-        targetSdkVersion(versionMap.getValue("targetSdkVersion").toInt())
+        minSdkVersion(version("minSdkVersion").toInt())
+        targetSdkVersion(version("targetSdkVersion").toInt())
         val proguardFiles = project.file("proguard").listFiles() ?: emptyArray()
         consumerProguardFiles(*proguardFiles)
     }
@@ -25,45 +48,19 @@ android {
             res.srcDirs(*srcDirs)
         }
     }
-    resourcePrefix("ebui_")
+    resourcePrefix(projectExtra("resourcePrefix"))
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        moduleName = "dev.ebnbin.ebui"
+        moduleName = "dev.ebnbin.${projectExtra<String>("libId")}"
     }
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
+        viewBinding = projectExtra<String>("viewBinding").toBoolean()
+        dataBinding = projectExtra<String>("dataBinding").toBoolean()
     }
-}
-
-dependencies {
-    val dependencyMap: Map<String, String> by rootProject.extra
-    fun dependency(id: String): String {
-        val version = dependencyMap[id].also {
-            requireNotNull(it)
-        }
-        return "$id:$version"
-    }
-
-    fun devDependency(id: String): Any {
-        return if (gradleLocalProperties(rootDir)["devEnabled"] == "true") {
-            project(":$id")
-        } else {
-            "com.github.ebnbin:$id:${rootProject.extra["dev.$id"]}"
-        }
-    }
-
-    api(devDependency("eb"))
-
-    api(dependency("androidx.appcompat:appcompat"))
-    api(dependency("androidx.activity:activity-ktx"))
-    api(dependency("androidx.fragment:fragment-ktx"))
-    api(dependency("androidx.recyclerview:recyclerview"))
-    api(dependency("com.google.android.material:material"))
 }
 
 afterEvaluate {
@@ -74,4 +71,16 @@ afterEvaluate {
             }
         }
     }
+}
+
+//*********************************************************************************************************************
+
+dependencies {
+    api(devDependency("eb"))
+
+    api(dependency("androidx.appcompat:appcompat"))
+    api(dependency("androidx.activity:activity-ktx"))
+    api(dependency("androidx.fragment:fragment-ktx"))
+    api(dependency("androidx.recyclerview:recyclerview"))
+    api(dependency("com.google.android.material:material"))
 }
