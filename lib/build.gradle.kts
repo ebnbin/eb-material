@@ -1,5 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -8,35 +6,11 @@ plugins {
     `maven-publish`
 }
 
-inline fun <reified T> rootProjectExtra(key: String): T {
-    return rootProject.extra.properties.getValue(key) as T
-}
-
-inline fun <reified T> projectExtra(key: String): T {
-    return project.extra.properties.getValue(key) as T
-}
-
-fun version(key: String): String {
-    return rootProjectExtra<Map<String, String>>("versionMap").getValue(key)
-}
-
-fun dependency(id: String): String {
-    return "$id:${rootProjectExtra<Map<String, String>>("dependencyMap").getValue(id)}"
-}
-
-fun devDependency(id: String): Any {
-    return if (gradleLocalProperties(rootDir)["devEnabled"] == "true") {
-        project(":$id")
-    } else {
-        "com.github.ebnbin:$id:${rootProjectExtra<String>("dev.$id")}"
-    }
-}
-
 android {
-    compileSdkVersion(version("compileSdkVersion").toInt())
+    compileSdkVersion(Versions.compileSdkVersion)
     defaultConfig {
-        minSdkVersion(version("minSdkVersion").toInt())
-        targetSdkVersion(version("targetSdkVersion").toInt())
+        minSdkVersion(Versions.minSdkVersion)
+        targetSdkVersion(Versions.targetSdkVersion)
         val proguardFiles = project.file("proguard").listFiles() ?: emptyArray()
         consumerProguardFiles(*proguardFiles)
     }
@@ -48,26 +22,29 @@ android {
             res.srcDirs(*srcDirs)
         }
     }
-    resourcePrefix(projectExtra("resourcePrefix"))
+    (project.extraProperties()["resourcePrefix"] as String?)?.let {
+        resourcePrefix(it)
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        moduleName = "dev.ebnbin.${projectExtra<String>("libId")}"
+        moduleName = "dev.ebnbin.${project.extraProperties().getValue("libId") as String}"
     }
     buildFeatures {
-        viewBinding = projectExtra<String>("viewBinding").toBoolean()
-        dataBinding = projectExtra<String>("dataBinding").toBoolean()
+        viewBinding = (project.extraProperties().getOrDefault("viewBinding", "false") as String).toBoolean()
+        dataBinding = (project.extraProperties().getOrDefault("dataBinding", "false") as String).toBoolean()
     }
 }
 
 afterEvaluate {
     publishing {
         publications {
-            create<MavenPublication>(projectExtra("publish")) {
-                from(components[projectExtra("publish")])
+            val publish = project.extraProperties().getOrDefault("publish", "release") as String
+            create<MavenPublication>(publish) {
+                from(components[publish])
             }
         }
     }
@@ -76,19 +53,19 @@ afterEvaluate {
 //*********************************************************************************************************************
 
 dependencies {
-    api(devDependency("eb"))
+    api(Dependencies.comGithubEbnbin_eb.devNotation(project))
 
-    api(dependency("androidx.lifecycle:lifecycle-viewmodel-ktx"))
-    api(dependency("androidx.appcompat:appcompat"))
-    api(dependency("androidx.activity:activity-ktx"))
-    api(dependency("androidx.fragment:fragment-ktx"))
-    api(dependency("androidx.preference:preference-ktx"))
-    api(dependency("androidx.constraintlayout:constraintlayout"))
-    api(dependency("androidx.coordinatorlayout:coordinatorlayout"))
-    api(dependency("androidx.recyclerview:recyclerview"))
-    api(dependency("androidx.swiperefreshlayout:swiperefreshlayout"))
-    api(dependency("androidx.viewpager2:viewpager2"))
-    api(dependency("androidx.cardview:cardview"))
-    api(dependency("androidx.gridlayout:gridlayout"))
-    api(dependency("com.google.android.material:material"))
+    api(Dependencies.androidxLifecycle_lifecycleViewmodelKtx.notation())
+    api(Dependencies.androidxAppcompat_appcompat.notation())
+    api(Dependencies.androidxActivity_activityKtx.notation())
+    api(Dependencies.androidxFragment_fragmentKtx.notation())
+    api(Dependencies.androidxPreference_preferenceKtx.notation())
+    api(Dependencies.androidxConstraintlayout_constraintlayout.notation())
+    api(Dependencies.androidxCoordinatorlayout_coordinatorlayout.notation())
+    api(Dependencies.androidxRecyclerview_recyclerview.notation())
+    api(Dependencies.androidxSwiperefreshlayout_swiperefreshlayout.notation())
+    api(Dependencies.androidxViewpager2_viewpager2.notation())
+    api(Dependencies.androidxCardview_cardview.notation())
+    api(Dependencies.androidxGridlayout_gridlayout.notation())
+    api(Dependencies.comGoogleAndroidMaterial_material.notation())
 }
