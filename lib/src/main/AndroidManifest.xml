@@ -2,7 +2,9 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.ebnbin.ebui">
-    <application>
+    <application
+        android:icon="@mipmap/ebui_icon"
+        android:roundIcon="@mipmap/ebui_icon">
         <activity
             android:name=".FragmentWrapperActivity"/>
         <provider
