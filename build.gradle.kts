@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath(Dependencies.comAndroidToolsBuild_gradle.composeNotation())
+        classpath(Dependencies.comAndroidToolsBuild_gradle.notation())
         classpath(Dependencies.orgJetbrainsKotlin_kotlinGradlePlugin.notation())
     }
 }
