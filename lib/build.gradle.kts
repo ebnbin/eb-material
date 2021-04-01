@@ -53,7 +53,7 @@ afterEvaluate {
 //*********************************************************************************************************************
 
 dependencies {
-    api(Dependencies.comGithubEbnbin_eb.devNotation(project))
+    api(Dependencies.comGithubDevEbnbin_eb.devNotation(project))
 
     api(Dependencies.androidxLifecycle_lifecycleViewmodelKtx.notation())
     api(Dependencies.androidxAppcompat_appcompat.notation())
