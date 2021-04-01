@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewTreeLifecycleOwner
+import androidx.lifecycle.ViewTreeViewModelStoreOwner
+import androidx.savedstate.ViewTreeSavedStateRegistryOwner
 
 inline fun <reified T : Fragment> Activity.openFragment(
     fragmentIsView: Boolean = true,
@@ -64,11 +67,25 @@ open class FragmentWrapperActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setOwners()
         if (savedInstanceState == null) {
             supportFragmentManager.commit(allowStateLoss = true) {
                 val containerViewId = if (fragmentIsView) android.R.id.content else 0
                 add(containerViewId, fragmentClass, fragmentArgs, fragmentTag)
             }
+        }
+    }
+
+    private fun setOwners() {
+        val decorView = window.decorView
+        if (ViewTreeLifecycleOwner.get(decorView) == null) {
+            ViewTreeLifecycleOwner.set(decorView, this)
+        }
+        if (ViewTreeViewModelStoreOwner.get(decorView) == null) {
+            ViewTreeViewModelStoreOwner.set(decorView, this)
+        }
+        if (ViewTreeSavedStateRegistryOwner.get(decorView) == null) {
+            ViewTreeSavedStateRegistryOwner.set(decorView, this)
         }
     }
 
