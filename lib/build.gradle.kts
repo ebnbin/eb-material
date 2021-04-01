@@ -36,6 +36,10 @@ android {
     buildFeatures {
         viewBinding = project.getStringExtra("lib.viewBinding")?.toBoolean() ?: false
         dataBinding = project.getStringExtra("lib.dataBinding")?.toBoolean() ?: false
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.0-beta03"
     }
 }
 
@@ -57,7 +61,7 @@ dependencies {
 
     api(Dependencies.androidxLifecycle_lifecycleViewmodelKtx.notation())
     api(Dependencies.androidxAppcompat_appcompat.notation())
-    api(Dependencies.androidxActivity_activityKtx.notation())
+//    api(Dependencies.androidxActivity_activityKtx.notation())
     api(Dependencies.androidxFragment_fragmentKtx.notation())
     api(Dependencies.androidxPreference_preferenceKtx.notation())
     api(Dependencies.androidxConstraintlayout_constraintlayout.notation())
@@ -68,4 +72,10 @@ dependencies {
     api(Dependencies.androidxCardview_cardview.notation())
     api(Dependencies.androidxGridlayout_gridlayout.notation())
     api(Dependencies.comGoogleAndroidMaterial_material.notation())
+
+    api("androidx.compose.runtime:runtime-livedata:1.0.0-beta03")
+    api("androidx.compose.material:material:1.0.0-beta03")
+    api("androidx.compose.material:material-icons-extended:1.0.0-beta03")
+    api("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03")
+    api("androidx.activity:activity-compose:1.3.0-alpha05")
 }
