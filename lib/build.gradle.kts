@@ -36,10 +36,6 @@ android {
     buildFeatures {
         viewBinding = project.getStringExtra("lib.viewBinding")?.toBoolean() ?: false
         dataBinding = project.getStringExtra("lib.dataBinding")?.toBoolean() ?: false
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
     }
 }
 
@@ -57,15 +53,11 @@ afterEvaluate {
 //*********************************************************************************************************************
 
 dependencies {
-    api(Dependencies.comGithubDevEbnbin_eb.notation(project, "0.0.36"))
+    api(Dependencies.comGithubDevEbnbin_eb.notation(project, "0.0.37"))
 
     api(Dependencies.androidxLifecycle_lifecycleViewmodelKtx.notation())
-    api(Dependencies.androidxComposeRuntime_runtimeLivedata.notation())
-    api(Dependencies.androidxLifecycle_lifecycleViewmodelCompose.notation())
-    api(Dependencies.androidxComposeMaterial_material.notation())
-    api(Dependencies.androidxComposeMaterial_materialIconsExtended.notation())
     api(Dependencies.androidxAppcompat_appcompat.notation())
-    api(Dependencies.androidxActivity_activityCompose.notation())
+    api(Dependencies.androidxActivity_activity.notation())
     api(Dependencies.androidxFragment_fragmentKtx.notation())
     api(Dependencies.androidxPreference_preferenceKtx.notation())
     api(Dependencies.androidxConstraintlayout_constraintlayout.notation())
