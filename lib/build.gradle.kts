@@ -52,11 +52,11 @@ afterEvaluate {
 //*********************************************************************************************************************
 
 dependencies {
-    api(Dependencies.comGithubDevEbnbin_eb.notation(project, "0.0.37"))
+    api(Dependencies.devEbnbin_eb.notation(project, "0.0.39"))
 
     api(Dependencies.androidxLifecycle_lifecycleViewmodelKtx.notation())
     api(Dependencies.androidxAppcompat_appcompat.notation())
-    api(Dependencies.androidxActivity_activity.notation())
+    api(Dependencies.androidxActivity_activityKtx.notation())
     api(Dependencies.androidxFragment_fragmentKtx.notation())
     api(Dependencies.androidxPreference_preferenceKtx.notation())
     api(Dependencies.androidxConstraintlayout_constraintlayout.notation())
