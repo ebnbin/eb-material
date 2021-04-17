@@ -13,7 +13,7 @@ internal class EBUIInitializer : ContentProvider() {
     }
 
     private fun initTheme() {
-        EBUIPrefs.night_mode.observeForever {
+        EBUIPrefs.nightMode.observeForever {
             AppCompatDelegate.setDefaultNightMode(it)
         }
     }
